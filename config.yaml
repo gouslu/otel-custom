@@ -1,0 +1,21 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+  custom:
+    port: 8080
+
+processors:
+  custom:
+
+exporters:
+  logging:
+    verbosity: detailed
+  custom:
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp, custom]
+      processors: [custom]
+      exporters: [logging, custom]
