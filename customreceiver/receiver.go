@@ -7,6 +7,7 @@ import (
 
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/consumer"
+	"go.opentelemetry.io/collector/pdata/ptrace"
 	"go.uber.org/zap"
 )
 
@@ -23,9 +24,11 @@ func (customRcvr *customReceiver) Start(ctx context.Context, host component.Host
 	ctx = context.Background()
 	ctx, customRcvr.cancel = context.WithCancel(ctx)
 
-	customRcvr.startListen()
+	go func() {
+		customRcvr.startListen(ctx)
+		<-ctx.Done()
+	}()
 
-	ctx.Done()
 	return nil
 }
 
@@ -34,20 +37,14 @@ func (customRcvr *customReceiver) Shutdown(ctx context.Context) error {
 	return nil
 }
 
-func (customRcvr *customReceiver) startListen() {
-	http.HandleFunc("/hello", hello)
-	http.HandleFunc("/headers", headers)
+func (customRcvr *customReceiver) startListen(ctx context.Context) {
+	http.HandleFunc("/", customRcvr.hello(ctx))
 	http.ListenAndServe((":" + customRcvr.config.Port), nil)
 }
 
-func hello(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprintf(w, "hello\n")
-}
-
-func headers(w http.ResponseWriter, req *http.Request) {
-	for name, headers := range req.Header {
-		for _, h := range headers {
-			fmt.Fprintf(w, "%v: %v\n", name, h)
-		}
+func (customRcvr *customReceiver) hello(ctx context.Context) func(http.ResponseWriter, *http.Request) {
+	return func(w http.ResponseWriter, req *http.Request) {
+		fmt.Fprintf(w, "hello\n")
+		customRcvr.nextConsumer.ConsumeTraces(ctx, ptrace.NewTraces())
 	}
 }
