@@ -1,0 +1,29 @@
+FROM alpine:latest as prep
+RUN apk --update add ca-certificates
+
+ARG USER_UID=10001
+USER ${USER_UID}
+
+RUN mkdir -p /tmp
+
+FROM golang:1.19-bullseye as golang
+
+ENV GOPATH=/go
+
+COPY --from=prep /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+RUN go install github.com/go-delve/delve/cmd/dlv@latest
+
+WORKDIR /go
+
+COPY . /go/src/github.com/gouslu/otel-custom
+
+WORKDIR /go/src/github.com/gouslu/otel-custom
+RUN ls
+
+RUN go mod download
+
+RUN go build -gcflags="all=-N -l" -o otel-custom
+EXPOSE 4317 55680 55679
+
+ENTRYPOINT ["/go/bin/dlv"]
+CMD ["--listen=:40000", "--headless=true", "--api-version=2", "--accept-multiclient", "exec", "./otel-custom", "--", "--config=/conf/config.yaml"]

@@ -1,7 +1,7 @@
 dist:
-  name: otelcol-dev
+  name: otel-custom
   description: Basic OTel Collector distribution for Developers
-  output_path: ./otelcol-dev
+  output_path: ./otel-custom
   otelcol_version: 0.68.0
 
 exporters:
