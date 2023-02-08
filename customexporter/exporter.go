@@ -5,6 +5,8 @@ import (
 
 	"go.opentelemetry.io/collector/component"
 	"go.opentelemetry.io/collector/consumer"
+	"go.opentelemetry.io/collector/pdata/plog"
+	"go.opentelemetry.io/collector/pdata/pmetric"
 	"go.opentelemetry.io/collector/pdata/ptrace"
 	"go.uber.org/zap"
 )
@@ -25,6 +27,14 @@ func (s *customExporter) Shutdown(context.Context) error {
 }
 
 func (s *customExporter) processTraces(ctx context.Context, batch ptrace.Traces) error {
+	return nil
+}
+
+func (s *customExporter) processMetrics(ctx context.Context, batch pmetric.Metrics) error {
+	return nil
+}
+
+func (s *customExporter) processLogs(ctx context.Context, batch plog.Logs) error {
 	return nil
 }
 

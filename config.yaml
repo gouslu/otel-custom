@@ -4,6 +4,17 @@ receivers:
       grpc:
   custom:
     port: 8080
+  prometheus:
+    config:
+      scrape_configs:
+      - job_name: 'otelcol'
+        scrape_interval: 5s
+        static_configs:
+        - targets: ['0.0.0.0:8888']
+        metric_relabel_configs:
+          - source_labels: [ __name__ ]
+            regex: '.*grpc_io.*'
+            action: drop
 
 processors:
   custom:
@@ -12,10 +23,33 @@ exporters:
   logging:
     verbosity: detailed
   custom:
+  # jaeger:
+  #   endpoint: localhost:14250
+  #   tls:
+  #     insecure: true
+  # prometheusremotewrite:
+  #   endpoint: "http://localhost:9009/api/v1/push"
+  #   tls:
+  #     insecure: true
+
+extensions:
+  zpages:
 
 service:
+  extensions: [zpages]
   pipelines:
     traces:
       receivers: [otlp, custom]
       processors: [custom]
       exporters: [logging, custom]
+    metrics:
+      receivers: [prometheus]
+      processors: [custom]
+      exporters: [logging]
+  telemetry:
+    logs:
+      level: debug
+      # output_paths:
+        # - C:/Users/gouslu/go/src/github.com/gouslu/otel-custom/otel-custom.log
+    metrics:
+      address: ":8888"

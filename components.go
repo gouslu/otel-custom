@@ -7,6 +7,7 @@ import (
 	"github.com/gouslu/custom/customprocessor"
 	"github.com/gouslu/custom/customexporter"
 	jaegerexporter "github.com/open-telemetry/opentelemetry-collector-contrib/exporter/jaegerexporter"
+	prometheusreceiver "github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver"
 	"go.opentelemetry.io/collector/exporter"
 	loggingexporter "go.opentelemetry.io/collector/exporter/loggingexporter"
 	"go.opentelemetry.io/collector/extension"
@@ -15,6 +16,7 @@ import (
 	batchprocessor "go.opentelemetry.io/collector/processor/batchprocessor"
 	"go.opentelemetry.io/collector/receiver"
 	otlpreceiver "go.opentelemetry.io/collector/receiver/otlpreceiver"
+	"go.opentelemetry.io/collector/extension/zpagesextension"
 )
 
 func components() (otelcol.Factories, error) {
@@ -22,6 +24,7 @@ func components() (otelcol.Factories, error) {
 	factories := otelcol.Factories{}
 
 	factories.Extensions, err = extension.MakeFactoryMap(
+		zpagesextension.NewFactory(),
 	)
 	if err != nil {
 		return otelcol.Factories{}, err
@@ -30,6 +33,7 @@ func components() (otelcol.Factories, error) {
 	factories.Receivers, err = receiver.MakeFactoryMap(
 		customreceiver.NewFactory(),
 		otlpreceiver.NewFactory(),
+		prometheusreceiver.NewFactory(),
 	)
 	if err != nil {
 		return otelcol.Factories{}, err
