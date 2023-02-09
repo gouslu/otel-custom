@@ -8,6 +8,7 @@ import (
 	"github.com/gouslu/custom/customexporter"
 	jaegerexporter "github.com/open-telemetry/opentelemetry-collector-contrib/exporter/jaegerexporter"
 	prometheusreceiver "github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver"
+	prometheusexporter "github.com/open-telemetry/opentelemetry-collector-contrib/exporter/prometheusexporter"
 	"go.opentelemetry.io/collector/exporter"
 	loggingexporter "go.opentelemetry.io/collector/exporter/loggingexporter"
 	"go.opentelemetry.io/collector/extension"
@@ -43,6 +44,7 @@ func components() (otelcol.Factories, error) {
 		loggingexporter.NewFactory(),
 		jaegerexporter.NewFactory(),
 		customexporter.NewFactory(),
+		prometheusexporter.NewFactory(),
 	)
 	if err != nil {
 		return otelcol.Factories{}, err

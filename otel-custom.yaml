@@ -66,6 +66,14 @@ data:
       custom:
 
     exporters:
+      prometheus:
+        endpoint: ":9494"
+        namespace: promMmetrics
+        send_timestamps: true
+        metric_expiration: 180m
+        enable_open_metrics: true
+        resource_to_telemetry_conversion:
+          enabled: true
       logging:
         verbosity: detailed
       jaeger:
@@ -91,7 +99,7 @@ data:
         metrics:
           receivers: [prometheus]
           processors: [custom]
-          exporters: [logging]
+          exporters: [logging, prometheus]
       telemetry:
         logs:
           level: debug
@@ -181,6 +189,20 @@ roleRef:
   kind: ClusterRole
   name: otel-custom
   apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus
+spec:
+  ports:
+    - name: prometheus-exporter
+      port: 9494
+      protocol: TCP
+      targetPort: 9494
+  selector:
+    app.kubernetes.io/name: otel-custom
+  type: ClusterIP
 # ---
 # apiVersion: rbac.authorization.k8s.io/v1
 # kind: Role

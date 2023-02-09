@@ -9,6 +9,7 @@ require (
 	github.com/gouslu/custom/customprocessor v0.0.0-00010101000000-000000000000
 	github.com/gouslu/custom/customreceiver v0.0.0-00010101000000-000000000000
 	github.com/open-telemetry/opentelemetry-collector-contrib/exporter/jaegerexporter v0.68.0
+	github.com/open-telemetry/opentelemetry-collector-contrib/exporter/prometheusexporter v0.68.0
 	github.com/open-telemetry/opentelemetry-collector-contrib/receiver/prometheusreceiver v0.68.0
 	github.com/stretchr/testify v1.8.1
 	go.opentelemetry.io/collector v0.68.0
@@ -121,6 +122,7 @@ require (
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/mwitkow/go-conntrack v0.0.0-20190716064945-2f068394615f // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/internal/coreinternal v0.68.0 // indirect
+	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/resourcetotelemetry v0.68.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/translator/jaeger v0.68.0 // indirect
 	github.com/open-telemetry/opentelemetry-collector-contrib/pkg/translator/prometheus v0.68.0 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect

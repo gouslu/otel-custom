@@ -167,6 +167,8 @@ github.com/googleapis/gax-go/v2 v2.4.0/go.mod h1:XOTVJ59hdnfJLIP/dh8n5CGryZR2LxK
 github.com/googleapis/gax-go/v2 v2.6.0/go.mod h1:1mjbznJAPHFpesgE5ucqfYEscaz5kMdcIDwU/6+DDoY=
 github.com/googleapis/go-type-adapters v1.0.0/go.mod h1:zHW75FOG2aur7gAO2B+MLby+cLsWGBF62rFAi7WjWO4=
 github.com/kr/pretty v0.3.1/go.mod h1:hoEshYVHaxMs3cyo3Yncou5ZscifuDolrwPKZanG3xk=
+github.com/open-telemetry/opentelemetry-collector-contrib/exporter/prometheusexporter v0.68.0 h1:bDv+CdtytOLzEHaxyArvZUyN5MPrzcO4pmoF/hCnmNY=
+github.com/open-telemetry/opentelemetry-collector-contrib/exporter/prometheusexporter v0.68.0/go.mod h1:3/oYDdpImS8ANszuqQQMBnsjtksvqs+FJwgMfugrYss=
 github.com/open-telemetry/opentelemetry-collector-contrib/exporter/prometheusremotewriteexporter v0.68.0/go.mod h1:H7o7A7l8s1ErL4V2fNNgeBVa4ejk2ghn/+shqnE6IX0=
 github.com/pelletier/go-toml v1.9.4/go.mod h1:u1nR/EPcESfeI/szUZKdtJ0xRNbUoANCkoOuaOx1Y+c=
 github.com/pelletier/go-toml v1.9.5/go.mod h1:u1nR/EPcESfeI/szUZKdtJ0xRNbUoANCkoOuaOx1Y+c=
@@ -176,11 +178,8 @@ go.opentelemetry.io/collector v0.67.1-0.20221216200611-892d07dffbb8/go.mod h1:Qn
 go.opentelemetry.io/collector/component v0.67.1-0.20221216200611-892d07dffbb8/go.mod h1:VbvZytUKFYeVzQCpuJ6jxAXl9Rwxz+7sJ8d6uuT1qmM=
 go.opentelemetry.io/collector/confmap v0.67.1-0.20221216200611-892d07dffbb8/go.mod h1:vE14PymmnYeZe+zoOxO5rXCy5BQ1AjUHpr/gDgLl6mw=
 go.opentelemetry.io/collector/consumer v0.67.1-0.20221216200611-892d07dffbb8/go.mod h1:maReFNF5y1GcBAM1zBq3ukRg5caMRsoHAK4+5hN3wA0=
-go.opentelemetry.io/collector/extension/zpagesextension v0.68.0/go.mod h1:5RMJKUEx+/4q63epHSNibnu6LYFH0xZOGylqN/CqNfA=
 go.opentelemetry.io/collector/featuregate v0.67.1-0.20221216200611-892d07dffbb8/go.mod h1:tewuFKJYalWBU0bmNKg++MC1ipINXUr6szYzOw2p1GI=
 go.opentelemetry.io/collector/pdata v1.0.0-rc1.0.20221216200611-892d07dffbb8/go.mod h1:3gknzI1BqPVbEprOIbtaPQgPAYvjRf8kdkpGMJjv14E=
-go.opentelemetry.io/contrib/zpages v0.37.0 h1:lFEw7jgrW75kZ40gkXtywV0jTJt8q7w85oTLGc1IZBU=
-go.opentelemetry.io/contrib/zpages v0.37.0/go.mod h1:eENgsW/BBmryW838vx6FVH63sPBIVnUds1oCTSuwCpA=
 golang.org/x/mod v0.6.0/go.mod h1:4mET923SAdbXp2ki8ey+zGs1SLqsuM2Y0uvdZR/fUNI=
 golang.org/x/net v0.0.0-20210119194325-5f4716e94777/go.mod h1:m0MpNAwzfU5UDzcl9v0D8zg8gWTRqZa9RBIspLL5mdg=
 golang.org/x/net v0.0.0-20210316092652-d523dce5a7f4/go.mod h1:RBQZq4jEuRlivfhVLdyRGr576XBO4/greRjx4P4O3yc=
